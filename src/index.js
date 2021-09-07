@@ -12,21 +12,21 @@ const insertHtml = R.curry((selector, html) => {
   elem.innerHTML = html;
 });
 
-insertHtml("#slideApp", '<h1 class="message"></h1>');
+// insertHtml("#slideApp", '<h1 class="message"></h1>');
 
-insertHtml(".message", "hello world");
+// insertHtml(".message", "hello world");
 
-// function iAmPure(selector, html) {
-//   return new IOContainer(function () {
-//     const elem = document.querySelector(selector);
-//     if (elem) {
-//       elem.innerHTML = html;
-//     }
-//   });
-// }
+function iAmPure(selector, html) {
+  return new IOContainer(function () {
+    const elem = document.querySelector(selector);
+    if (elem) {
+      elem.innerHTML = html;
+    }
+  });
+}
 
-// const io = iAmPure(
-//   "#slideApp",
-//   '<h1 class="message">safe inside my container</h1>'
-// );
-// io.perform();
+const io = iAmPure(
+  "#slideApp",
+  '<h1 class="message">safe inside my container</h1>'
+);
+io.perform();

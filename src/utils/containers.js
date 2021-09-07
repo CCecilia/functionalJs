@@ -8,7 +8,7 @@ export class IOContainer {
     }
   }
 
-  perform(fn) {
+  perform() {
     this.value();
   }
 }
