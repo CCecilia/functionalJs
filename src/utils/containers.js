@@ -8,6 +8,18 @@ export class IOContainer {
     }
   }
 
+  // map :: (IOContainer io) => io (a -> b) ~> (b -> c) -> io (b -> c)
+  map(fn) {
+    return new IOContainer(() => fn(this.value()));
+  }
+
+  // mapAsync :: (IOContainer io) => io (a -> b) ~> (b -> c) -> io (b -> c)
+  mapAsync(fn) {
+    const val = this.value();
+
+    return new IOContainer(() => (R.is(Promise, val) ? val.then(fn) : fn(val)));
+  }
+
   perform() {
     this.value();
   }
